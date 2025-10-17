@@ -1,0 +1,9 @@
+# This file ensures the datasdtm directory is tracked by Git
+# Place your SDTM datasets here (e.g., dm.sas7bdat, ae.sas7bdat, etc.)
+# 
+# Example SDTM datasets:
+# - dm.sas7bdat (Demographics)
+# - ae.sas7bdat (Adverse Events) 
+# - cm.sas7bdat (Concomitant Medications)
+# - vs.sas7bdat (Vital Signs)
+# - lb.sas7bdat (Laboratory Data)

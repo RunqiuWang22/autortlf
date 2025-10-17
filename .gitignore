@@ -51,7 +51,12 @@ desktop.ini
 *.xlsx
 *.sas7bdat
 *.sas7bcat
-!dataadam/*.rda  # Keep sample data
+
+# Keep sample data files
+!dataadam/*.rda
+!datasdtm/*.rda
+!dataadam/
+!datasdtm/
 
 # Docker files (exclude build artifacts)
 .dockerignore
@@ -61,8 +66,6 @@ docker-compose.override.yml
 # Keep essential Docker files
 !Dockerfile
 !docker-compose.yml
-!docker_build.sh
-!docker_push.sh
 !docker_validate.R
 !install_packages.R
 
