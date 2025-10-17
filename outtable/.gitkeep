@@ -1,0 +1,2 @@
+# This file ensures the outtable directory is tracked by git
+# Generated output files in this directory are ignored by .gitignore

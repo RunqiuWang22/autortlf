@@ -1,0 +1,55 @@
+MIT License
+
+Copyright (c) 2025 AutoRTLF Development Team (Kan Li, Cursor)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+## Third-Party Dependencies
+
+This software uses the examples and data in the following third-party packages:
+
+### R Packages
+- **r2rtf**: Copyright (c) 2024 Merck & Co., Inc., Rahway, NJ, USA and its affiliates.
+  Licensed under Apache License 2.0. See: https://github.com/Merck/r2rtf
+- **pharmaverseadam**: Copyright (c) 2024 Pharmaverse contributors.
+  Licensed under Apache License 2.0. See: https://github.com/pharmaverse/pharmaverseadam
+
+### Sample Data
+- Sample data included in this repository is derived from the `pharmaverseadam` R package
+- This data is used for demonstration and testing purposes only
+- Users should replace with their own clinical trial data for production use
+
+### Docker Base Images
+- **rocker/r-ver:4.4.2**: Copyright (c) 2024 Rocker Project
+  Licensed under GPL-2. See: https://github.com/rocker-org/rocker
+- **rocker/rstudio:4.4.2**: Copyright (c) 2024 Rocker Project  
+  Licensed under GPL-2. See: https://github.com/rocker-org/rocker
+
+## Attribution Requirements
+
+When using this software, you must:
+1. Include this license file in any distribution
+2. Maintain the copyright notices for third-party dependencies
+3. Include attribution to the original authors of r2rtf and pharmaverseadam packages
+4. Comply with the respective licenses of all third-party dependencies
+
+## Disclaimer
+
+The sample data provided is for demonstration purposes only and should not be used
+for actual clinical trial submissions and regulatory review.

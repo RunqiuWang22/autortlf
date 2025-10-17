@@ -1,0 +1,59 @@
+# =============================================================================
+# AutoRTLF Docker Environment with RStudio Server (Lightweight)
+# =============================================================================
+# Purpose: Reproducible R environment with RStudio Server for AutoRTLF framework
+# Version: 1.0.0
+# Created: 2025-10-16
+# Author: AutoRTLF Development Team (Kan Li, Cursor)
+# =============================================================================
+
+# Use RStudio Server base image for interactive development
+FROM rocker/rstudio:4.4.2
+
+# Set environment variables
+ENV R_LIBS_USER=/usr/local/lib/R/site-library
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Install system dependencies for R packages (minimal set)
+RUN apt-get update && apt-get install -y \
+    libcurl4-openssl-dev \
+    libssl-dev \
+    libxml2-dev \
+    git \
+    pandoc \
+    --no-install-recommends && \
+    rm -rf /var/lib/apt/lists/*
+
+# Set working directory
+WORKDIR /autortlf
+
+# Copy R package installation script and install R packages
+COPY install_packages.R .
+RUN Rscript install_packages.R
+
+# Copy the entire project into the container
+COPY . .
+
+# Create necessary output directories and set permissions
+RUN mkdir -p outdata outgraph outlist outlog outtable \
+    && chmod -R 777 outdata outgraph outlist outlog outtable
+
+# Create an entrypoint script that starts RStudio Server
+RUN echo '#!/bin/bash\necho "=== AutoRTLF Docker Environment with RStudio Server ===\n"\necho "R version: $(R --version | head -n 1)"\necho "Working directory: $(pwd)"\necho "RStudio Server: http://localhost:8787"\necho "Username: rstudio"\necho "Password: tlf123"\necho "Available commands:\n  - Rscript pganalysis/run_baseline0char.R [metadata] [config]\n  - Rscript pganalysis/run_ae0specific.R [metadata] [config]\n  - Rscript docker_validate.R (run validation)\n  - bash (interactive shell)\n"\n\n# Start RStudio Server in background\n/usr/lib/rstudio-server/bin/rstudio-server start\n\n# Keep container running\nexec "$@"' > /usr/local/bin/autortlf_entrypoint \
+    && chmod +x /usr/local/bin/autortlf_entrypoint
+
+# Set the entrypoint
+ENTRYPOINT ["/usr/local/bin/autortlf_entrypoint"]
+
+# Set default command to keep container running
+CMD ["tail", "-f", "/dev/null"]
+
+# Expose RStudio Server port
+EXPOSE 8787
+
+# Metadata
+LABEL maintainer="AutoRTLF Development Team" \
+      version="1.0.0" \
+      description="AutoRTLF - Automated Regulatory Tables, Listings, and Figures with RStudio Server" \
+      r.version="4.4.2" \
+      reproducibility="FDA-compliant"

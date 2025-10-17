@@ -1,0 +1,265 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://autortlf.com/schemas/ae0specific.schema.json",
+  "title": "AE Specific Table Configuration Schema",
+  "description": "JSON Schema for adverse events specific table configuration",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": ["Table"],
+      "description": "Type of TLF output"
+    },
+    "rfunction": {
+      "type": "string",
+      "const": "ae0specific",
+      "description": "R function name to execute this table"
+    },
+    "table_id": {
+      "type": "string",
+      "description": "Table identifier (e.g., Table 14.3.1.1.1)",
+      "pattern": "^Table\\s+[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "rename_output": {
+      "type": "string",
+      "description": "Output file name without extension",
+      "pattern": "^[a-zA-Z0-9_]+$"
+    },
+    "title": {
+      "type": "string",
+      "description": "Main title of the table"
+    },
+    "append_title": {
+      "type": "string",
+      "description": "Additional title text to append to main title"
+    },
+    "subtitle1": {
+      "type": "string",
+      "description": "First subtitle line (supports parameter interpolation)"
+    },
+    "subtitle2": {
+      "type": "string",
+      "description": "Second subtitle line for population (supports GLOBAL references)"
+    },
+    "population_from": {
+      "type": "string",
+      "description": "Dataset name for population analysis",
+      "enum": ["ADSL", "ADAE", "ADLB", "ADVS", "ADTTE"]
+    },
+    "observation_from": {
+      "type": "string",
+      "description": "Dataset name for AE observations",
+      "enum": ["ADSL", "ADAE", "ADLB", "ADVS", "ADTTE"]
+    },
+    "population_filter": {
+      "type": "string",
+      "description": "R expression for population filtering (supports GLOBAL references)"
+    },
+    "observation_filter": {
+      "type": "string",
+      "description": "R expression for observation filtering (supports GLOBAL references)"
+    },
+    "treatment_var": {
+      "type": "string",
+      "description": "Treatment variable name (supports GLOBAL references)"
+    },
+    "treatment_code": {
+      "type": "string",
+      "description": "Treatment code variable name (supports GLOBAL references)"
+    },
+    "var_keep_in_population_from": {
+      "type": "array",
+      "items": {"type": "string"},
+      "description": "Variables to keep from population dataset that are not in observation dataset"
+    },
+    "display_options": {
+      "type": "object",
+      "description": "Display configuration options",
+      "properties": {
+        "display_total_column": {
+          "oneOf": [
+            {"type": "boolean"},
+            {"type": "string", "pattern": "^GLOBAL\\."}
+          ],
+          "description": "Whether to show overall/total column (supports GLOBAL references)"
+        },
+        "display_only_total_column": {
+          "type": "boolean",
+          "description": "Whether to display only the total column (no treatment groups)",
+          "default": false
+        },
+        "create_output_dataset": {
+          "oneOf": [
+            {"type": "boolean"},
+            {"type": "string", "pattern": "^GLOBAL\\."}
+          ],
+          "description": "Whether to create and save interim dataset (supports GLOBAL references)"
+        }
+      },
+      "additionalProperties": false
+    },
+    "output_format": {
+      "type": "object",
+      "description": "Output format configuration",
+      "properties": {
+        "output_data_format": {
+          "oneOf": [
+            {"type": "string", "enum": ["rds", "csv"]},
+            {"type": "string", "pattern": "^GLOBAL\\."}
+          ],
+          "description": "Format for output data files (supports GLOBAL references)"
+        },
+        "output_tlf_format": {
+          "oneOf": [
+            {"type": "string", "enum": ["rtf", "pdf", "docx", "html"]},
+            {"type": "string", "pattern": "^GLOBAL\\."}
+          ],
+          "description": "Format for TLF output files (supports GLOBAL references)"
+        }
+      },
+      "additionalProperties": false
+    },
+    "decimals": {
+      "type": "object",
+      "description": "Decimal place configuration",
+      "properties": {
+        "continuous": {
+          "oneOf": [
+            {"type": "integer", "minimum": 0, "maximum": 10},
+            {"type": "string", "pattern": "^GLOBAL\\."}
+          ],
+          "description": "Decimal places for continuous variables (supports GLOBAL references)"
+        },
+        "percent": {
+          "oneOf": [
+            {"type": "integer", "minimum": 0, "maximum": 10},
+            {"type": "string", "pattern": "^GLOBAL\\."}
+          ],
+          "description": "Decimal places for percentages (supports GLOBAL references)"
+        }
+      },
+      "additionalProperties": false
+    },
+    "footnotes": {
+      "type": "object",
+      "description": "Footnote configuration",
+      "properties": {
+        "standard": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {"type": "string"},
+              {"type": "string", "pattern": "^GLOBAL\\."}
+            ]
+          },
+          "description": "Standard footnotes (supports GLOBAL references)"
+        },
+        "study": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "Study-specific footnotes"
+        },
+        "data_cutoff": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {"type": "string"},
+              {"type": "string", "pattern": "^GLOBAL\\."}
+            ]
+          },
+          "description": "Data cutoff footnotes (supports GLOBAL references)"
+        }
+      },
+      "additionalProperties": false
+    },
+    "data_source_text": {
+      "type": "string",
+      "description": "Data source text (supports GLOBAL references)"
+    },
+    "ae_parameters": {
+      "type": "object",
+      "description": "AE-specific analysis parameters",
+      "properties": {
+        "min_subjects_threshold": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100,
+          "description": "Minimum percentage threshold for AE display (e.g., 5.0 for >=5%)"
+        },
+        "ae_term_var": {
+          "type": "string",
+          "description": "Primary AE term variable name",
+          "examples": ["AEDECOD", "AELLT", "AEHLT", "AEHLGT", "AESOC"]
+        },
+        "group_by_var": {
+          "type": ["string", "null"],
+          "description": "Variable for grouping AE terms (null for no grouping)",
+          "examples": ["AESOC", "AEBODSYS", "AESEV", "AREL", "AESER", null]
+        },
+        "group_display_name": {
+          "type": "string",
+          "description": "Display name for the grouping variable"
+        },
+        "to_proper_case": {
+          "type": "boolean",
+          "description": "Whether to convert AE terms to proper case",
+          "default": true
+        },
+        "sort_options": {
+          "type": "object",
+          "description": "Sorting configuration for AE terms",
+          "properties": {
+            "sort_by": {
+              "type": "string",
+              "enum": ["frequency", "alphabetical", "custom"],
+              "description": "Primary sort method",
+              "default": "frequency"
+            },
+            "sort_column": {
+              "type": "string",
+              "description": "Column to sort by (treatment arm name or 'Total')"
+            },
+            "sort_order": {
+              "type": "string",
+              "enum": ["desc", "asc"],
+              "description": "Sort order: descending or ascending",
+              "default": "desc"
+            },
+            "group_sort": {
+              "type": "string",
+              "enum": ["frequency", "alphabetical"],
+              "description": "How to sort groups themselves",
+              "default": "alphabetical"
+            },
+            "within_group_sort": {
+              "type": "string",
+              "enum": ["frequency", "alphabetical"],
+              "description": "How to sort within each group",
+              "default": "frequency"
+            }
+          },
+          "required": ["sort_by", "sort_order"],
+          "additionalProperties": false
+        },
+        "display_grouping_headers": {
+          "type": "boolean",
+          "description": "Whether to display grouping headers",
+          "default": true
+        }
+      },
+      "required": ["min_subjects_threshold", "ae_term_var", "sort_options"],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "type",
+    "rfunction",
+    "table_id", 
+    "rename_output",
+    "title",
+    "population_from",
+    "observation_from",
+    "ae_parameters"
+  ],
+  "additionalProperties": false
+}

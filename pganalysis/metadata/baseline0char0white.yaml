@@ -1,0 +1,66 @@
+# =============================================================================
+# Baseline Characteristics Table Configuration
+# =============================================================================
+# Program: baseline0char0white.yaml
+# Purpose: Configuration for baseline demographics and characteristics table
+# Version: 1.0.0
+# Created: 2025-10-16
+# Author: AutoRTLF Development Team (Kan Li, Cursor)
+# 
+# Change History:
+# Version | Date       | Author                    | Changes
+# --------|------------|---------------------------|--------------------------------
+# 1.0.0   | 2025-10-16 | AutoRTLF Development Team | Initial Baseline Table
+# =============================================================================
+
+type: Table
+rfunction: baseline0char   # call function do not change
+table_id: "Table 12.1.1.x"
+rename_output: baseline0char0white  # tlf file name
+title: "Baseline Characteristics"  # Direct title for now
+subtitle: "(GLOBAL.population.ITT.title) \n (GLOBAL.population.RACE_WHITE.title)"  #subtitle for population and subgroups
+population_from: "ADSL"                # Dataset to use for analysis
+population_filter: 'GLOBAL.population.ITT.filter_expression & GLOBAL.population.RACE_WHITE.filter_expression'  # Direct filter for now
+treatment_var: GLOBAL.treatment_config.treatment_random_var    # Direct reference for now
+treatment_code: GLOBAL.treatment_config.treatment_random_code_var
+display_options:
+   display_n: false
+   display_mean: true          
+   display_median: true         
+   display_range: true         
+   display_IQR: true       
+   display_total_column: GLOBAL.formatting.display_options.display_total_column   # whether to show overall/total column
+   display_only_total_column: false
+   create_output_dataset: GLOBAL.formatting.display_options.create_output_dataset
+
+output_format:
+  output_data_format: GLOBAL.output_format.output_data_format
+  output_tlf_format: GLOBAL.output_format.output_tlf_format
+
+decimals:
+  continuous: GLOBAL.formatting.decimals.continuous
+  percent: GLOBAL.formatting.decimals.percent 
+footnotes:
+  standard: 
+    - GLOBAL.titles.footnotes.standard
+  study:
+  data_cutoff:
+    - GLOBAL.titles.footnotes.data_cutoff
+data_source_text: "GLOBAL.titles.footnotes.data_source_text adam-adsl]"
+variables:
+  - name: "Age (years)"
+    source_var: "AGE"
+    type: "continuous"
+  - name: "Sex"
+    source_var: "SEX"
+    type: "categorical"
+    levels: ["M", "F"]
+    label_overrides:
+      M: "Male"
+      F: "Female"
+  - name: "Race"
+    source_var: "RACE"
+    type: "categorical"
+    
+
+

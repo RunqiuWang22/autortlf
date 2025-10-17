@@ -1,0 +1,89 @@
+# =============================================================================
+# AutoRTLF .gitignore
+# =============================================================================
+# Purpose: Exclude generated files and sensitive data from version control
+# Version: 1.0.0
+# Created: 2026-01-20
+# Author: AutoRTLF Development Team
+# =============================================================================
+
+# R specific
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+*.Rproj
+.Renviron
+
+# Output directories (keep structure, exclude generated files)
+outdata/*
+!outdata/.gitkeep
+outgraph/*
+!outgraph/.gitkeep
+outlist/*
+!outlist/.gitkeep
+outlog/*
+!outlog/.gitkeep
+outtable/*
+!outtable/.gitkeep
+
+# Temporary files
+*.log
+*.tmp
+Rplots.pdf
+*.swp
+*.swo
+*~
+
+# IDE files
+.vscode/
+.idea/
+*.sublime-*
+
+# System files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Data files (exclude sensitive data)
+*.rda
+*.csv
+*.xlsx
+*.sas7bdat
+*.sas7bcat
+!dataadam/*.rda  # Keep sample data
+
+# Docker files (exclude build artifacts)
+.dockerignore
+docker-compose.override.yml
+*.tar.gz
+
+# Keep essential Docker files
+!Dockerfile
+!docker-compose.yml
+!docker_build.sh
+!docker_push.sh
+!docker_validate.R
+!install_packages.R
+
+# Documentation (keep source, exclude generated)
+*.pdf
+*.docx
+!documents/*.md
+
+# Backup files
+*.bak
+*.backup
+*~
+
+# OS specific
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Windows specific
+*.lnk

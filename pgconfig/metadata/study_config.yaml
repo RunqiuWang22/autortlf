@@ -1,0 +1,146 @@
+# =============================================================================
+# Study Configuration Metadata
+# =============================================================================
+# Program: study_config.yaml
+# Purpose: Global study-level configuration for TLF generation
+# Version: 1.0.0
+# Created: 2025-10-16
+# Author: AutoRTLF Development Team (Kan Li, Cursor)
+# 
+# Change History:
+# Version | Date       | Author                    | Changes
+# --------|------------|---------------------------|--------------------------------
+# 1.0.0   | 2025-10-16 | AutoRTLF Development Team | Initial configuration creation
+# =============================================================================
+
+study_info:
+  study_id: "KL9999-X99"
+  study_title: "A Phase III Randomized, Double-Blind, Placebo-Controlled Study of Drug X"
+  project: "X99-ia01"
+  environment: "test"
+  data_cutoff_date: "2025-10-01"  
+
+paths:
+  study_root: "/autortlf"
+  dataadam_path: "dataadam"     # ADaM datasets
+  datasdtm_path: "dataasdtm"    # SDTM datasets
+  function_path: "function"     # R functions to conduct analysis and generate rtf outputs
+  function_global_path: "function/global"  # global functions and configure functions
+  function_standard_path: "function/standard"  # standard functions
+  function_study_path: "function/study"  # study functions
+  outtable_path: "outtable"
+  outgraph_path: "outgraph"
+  outlist_path: "outlist"
+  outdata_path: "outdata"
+  outlog_path: "outlog"
+  metadatalib_path: "metadatalib"       #metadata library path. json file define metadata
+  metadatalib_analysis_path: "metadatalib/lib_analysis"       #metadata library path for analysis 
+  metalib_config_path: "metadatalib/lib_config"       #metadata library path for project configuration
+  run_analysis_path: "pganalysis"                     # run program for TLFs
+  metadata_analysis_path: "pganalysis/metadata"           # metadata for analysis
+  run_config_path: "pgconfig"                    # run program for study configuration
+  metadata_config_path: "pgconfig/metadata"           # metadata for study configuration
+
+
+datasets:
+  ADSL:
+    filename: "adsl"
+    format: "rda"
+    description: "Subject-Level Analysis Dataset"
+  ADAE:
+    filename: "adae"
+    format: "rda" 
+    description: "Adverse Events Analysis Dataset"
+  ADLB:
+    filename: "adlb"
+    format: "rda"
+    description: "Laboratory Analysis Dataset"
+  ADVS:
+    filename: "advs"
+    format: "rda"
+    description: "Vital Signs Analysis Dataset"
+    observation_filter:
+  ADTTE:
+    filename: "adtte"
+    format: "rda"
+    description: "Time-to-Event Analysis Dataset"
+
+
+output_format:
+  output_data_format: "rds" # "rds" or "csv"
+  output_tlf_format: "rtf" # "rtf" or "pdf" or "docx" or "html"
+
+treatment_config:
+  treatment_random_var: "TRT01P"              # planned treatment variable
+  treatment_random_code_var: "TRT01PN"        # planned treatment variable code
+  treatment_actual_var: "TRT01A"              # actual treatment variable
+  treatment_actual_code_var: "TRT01AN"        # actual treatment variable code
+  treatment_labels:
+    "Placebo": "Placebo"
+    "Xanomeline High Dose": "X High Dose"
+    "Xanomeline Low Dose": "X Low Dose"
+  treatment_order: [ "Xanomeline High Dose", "Xanomeline Low Dose", "Placebo"]
+
+population:
+  SAFETY:
+    title: "Safety Analysis Population"
+    description: "All randomized participants who received at least one dose of study drug"
+    flag_var: "SAFFL"
+    filter_expression: 'SAFFL == "Y"'
+  ITT:
+    title: "Intent-to-Treat Population" 
+    description: "All randomized participants"
+    flag_var: "RANDFL"
+    filter_expression: 'RANDFL == "Y"'
+  RACE_WHITE:
+    title: "Race White Participants"
+    description: "Race white participants"
+    flag_var: "RACEGR1"
+    filter_expression: 'RACEGR1 == "White"'
+
+titles:
+  study_titles:
+    main: "Study KL9999-X99: A Phase III Study"
+  table_titles:
+    baseline: "Baseline Characteristics"
+  footnotes:
+    standard: 
+      - "N (%) unless otherwise specified"
+    safety:
+      - "Safety population includes all randomized subjects who received ≥1 dose of study drug"
+    data_cutoff:
+      - "Database Cutoff Date: {data_cutoff_date}"  
+    data_source_text:
+      - "Source: [Study {study_id}: "
+
+safety_analysis_param:
+  observation_filter: 'TRTEMFL == "Y"'  # Treatment-emergent AEs
+  ae_toxicity_grade_var: "AESEV"
+  ae_serious_var: "AESER"
+  ae_relation_var: "AREL"
+  ae_action_var: "AEACN"
+  ae_death_var: "AESDTH"
+
+
+formatting:
+  decimals:
+    continuous: 1       # decimal for continuous output
+    percent: 1         # decimals for percentage output     
+    pvalue: 3           # decimals for pvalue
+  missing_display: "--"
+  rtf_settings:
+    orientation: "portrait"  # page_orientation  (P = portrait)
+    font_size: 11          # font_size
+    page_width: 8.5         # page width in inches
+    page_height: 11.0       # page height in inches
+    margin_left: 1.0        # left margin
+    margin_right: 1.0       # right margin
+    margin_top: 1.0         # top margin
+    margin_bottom: 1.0      # bottom margin 
+    margin_header: 0.5       # margin for header
+    margin_footer: 0.5       # margin for footer
+  display_options:
+    display_total_column: true   # whether to show overall/total column
+    create_output_dataset: true # create and save interim dataset for table
+    display_tableid_in_title: false # whether to display table id in title
+    no_data_available_text: "No Record."

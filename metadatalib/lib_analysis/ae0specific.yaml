@@ -1,0 +1,74 @@
+# =============================================================================
+# AE Specific Table Configuration
+# =============================================================================
+# Program: ae0specific.yaml
+# Purpose: Configuration for adverse events specific table
+# Version: 1.0.0
+# Created: 2025-10-16
+# Author: AutoRTLF Development Team (Kan Li, Cursor)
+# 
+# Change History:
+# Version | Date       | Author                    | Changes
+# --------|------------|---------------------------|--------------------------------
+# 1.0.0   | 2025-10-16 | AutoRTLF Development Team | Initial AE specific table
+# =============================================================================
+
+type: Table
+rfunction: ae0specific        # function to use run this table
+table_id: "Table 14.3.1.1.1" # call function do not change
+rename_output: ae0specific # tlf file name
+title: "Participants With Adverse Events"  # Direct title for now
+append_title: "by Body System and Organ Class"  # if not empty, append to title
+subtitle1: "(Incidence {ae_parameters.min_subjects_threshold} in One or More Treatment Groups)"  # if not empty, append to title
+subtitle2: "(GLOBAL.population.SAFETY.title)"  #subtitle for population and subgroups
+population_from: "ADSL"                # Dataset to use for population analysis
+observation_from: "ADAE"               # Dataset to use for AE observations
+population_filter: GLOBAL.population.SAFETY.filter_expression   # Safety population filter
+observation_filter: 'GLOBAL.safety_analysis_param.observation_filter'  # Treatment-emergent AEs
+treatment_var: GLOBAL.treatment_config.treatment_actual_var    # Direct reference for now
+treatment_code: GLOBAL.treatment_config.treatment_actual_code_var
+var_keep_in_population_from: ["RACE"]  # specific variables want to keep in population from that are not in observation from. if not specified, leave as empty
+
+display_options:  
+   display_total_column: GLOBAL.formatting.display_options.display_total_column   # whether to show overall/total column
+   create_output_dataset: GLOBAL.formatting.display_options.create_output_dataset
+
+output_format:
+  output_data_format: GLOBAL.output_format.output_data_format
+  output_tlf_format: GLOBAL.output_format.output_tlf_format 
+decimals:
+  continuous: GLOBAL.formatting.decimals.continuous
+  percent: GLOBAL.formatting.decimals.percent
+
+footnotes:
+  standard: 
+    - GLOBAL.titles.footnotes.standard
+  study:
+  data_cutoff:
+    - GLOBAL.titles.footnotes.data_cutoff
+data_source_text: "GLOBAL.titles.footnotes.data_source_text adam-adae]"
+
+# AE-specific parameters
+ae_parameters:
+  # Minimum percentage threshold for AE display (5% = >=5.0, -5% = <5.0)
+  min_subjects_threshold: 5.0
+  # Primary AE term variable
+  ae_term_var: "AEDECOD"  # Preferred term
+  # Grouping configuration
+  group_by_var: "AEBODSYS"  # Variable to group by: AEBODSYS, or other AE groups, or leave empty
+  group_display_name: "Body System and Organ Class"  # Display name for grouping, if group_by_var is empty, ignored
+  to_proper_case: true  # convert AE terms to proper case
+  
+  # Enhanced sorting configuration
+  sort_options:
+    sort_by: "frequency"                # "frequency", "alphabetical", "custom"
+    sort_column: "Xanomeline High Dose"                # Sort by which column frequency
+    sort_order: "desc"                  # Descending order (highest first) or "asc" for ascending
+    group_sort: "alphabetical"             # Sort SOC groups by frequency or alphabetical (if alphabetical, then group_sort_order will be asc)
+    within_group_sort: "frequency"             # Sort within each group separately
+  
+  # Display options
+  display_grouping_headers: true   # Whether to show grouping headers
+  
+
+

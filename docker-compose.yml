@@ -1,0 +1,69 @@
+# =============================================================================
+# Docker Compose Configuration for AutoRTLF
+# =============================================================================
+# Purpose: Easy container orchestration for AutoRTLF development
+# Version: 1.0.0
+# Created: 2025-10-16
+# Author: AutoRTLF Development Team (Kan Li, Cursor)
+# =============================================================================
+
+version: '3.8'
+
+services:
+  autortlf:
+    # Option 1: Build from source
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    # Option 2: Use pre-built image from Docker Hub
+    # image: lkboy2018/autortlf:latest
+    image: autortlf:latest
+    container_name: autortlf-dev
+    volumes:
+      # Mount external data directory (read-only for data integrity)
+      - ./dataadam:/autortlf/dataadam:ro
+      # Mount output directories (read-write for generated files)
+      - ./outdata:/autortlf/outdata
+      - ./outgraph:/autortlf/outgraph
+      - ./outlist:/autortlf/outlist
+      - ./outlog:/autortlf/outlog
+      - ./outtable:/autortlf/outtable
+      # Mount project directory for development (optional)
+      - ./function:/autortlf/function
+      - ./metadatalib:/autortlf/metadatalib
+      - ./pganalysis:/autortlf/pganalysis
+      - ./pgconfig:/autortlf/pgconfig
+    working_dir: /autortlf
+    environment:
+      - R_LIBS_USER=/usr/local/lib/R/site-library
+      - PYTHONPATH=/autortlf/venv/lib/python3.11/site-packages
+    command: bash
+    stdin_open: true
+    tty: true
+    networks:
+      - autortlf-network
+
+  # Future service for MCP/AI integration
+  # mcp-ai:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile.mcp
+  #   image: autortlf-mcp:latest
+  #   container_name: autortlf-mcp
+  #   volumes:
+  #     - ./mcp:/autortlf/mcp
+  #   networks:
+  #     - autortlf-network
+  #   depends_on:
+  #     - autortlf
+
+networks:
+  autortlf-network:
+    driver: bridge
+
+# Volume definitions for persistent data
+volumes:
+  autortlf-data:
+    driver: local
+  autortlf-outputs:
+    driver: local

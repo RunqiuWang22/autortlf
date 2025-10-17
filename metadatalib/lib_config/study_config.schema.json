@@ -1,0 +1,471 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://autortlf.com/schemas/study_config.schema.json",
+  "title": "Study Configuration Schema",
+  "description": "JSON Schema for global study-level configuration for TLF generation",
+  "type": "object",
+  "properties": {
+    "study_info": {
+      "type": "object",
+      "description": "Basic study information",
+      "properties": {
+        "study_id": {
+          "type": "string",
+          "description": "Unique study identifier",
+          "pattern": "^[A-Z0-9-]+$"
+        },
+        "study_title": {
+          "type": "string",
+          "description": "Full study title"
+        },
+        "project": {
+          "type": "string",
+          "description": "Project identifier for output organization",
+          "pattern": "^[A-Za-z0-9-]+$"
+        },
+        "environment": {
+          "type": "string",
+          "enum": ["dev", "test", "prod"],
+          "description": "Environment designation"
+        },
+        "data_cutoff_date": {
+          "type": "string",
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
+          "description": "Data cutoff date in YYYY-MM-DD format"
+        }
+      },
+      "required": ["study_id", "study_title", "project"],
+      "additionalProperties": false
+    },
+    "paths": {
+      "type": "object",
+      "description": "File system path configuration",
+      "properties": {
+        "study_root": {
+          "type": "string",
+          "description": "Root directory for the study"
+        },
+        "dataadam_path": {
+          "type": "string",
+          "description": "Path to ADaM datasets",
+          "default": "dataadam"
+        },
+        "datasdtm_path": {
+          "type": "string", 
+          "description": "Path to SDTM datasets",
+          "default": "datasdtm"
+        },
+        "function_path": {
+          "type": "string",
+          "description": "Path to R functions",
+          "default": "function"
+        },
+        "function_global_path": {
+          "type": "string",
+          "description": "Path to global functions",
+          "default": "function/global"
+        },
+        "function_standard_path": {
+          "type": "string",
+          "description": "Path to standard functions",
+          "default": "function/standard"
+        },
+        "function_study_path": {
+          "type": "string",
+          "description": "Path to study-specific functions",
+          "default": "function/study"
+        },
+        "outtable_path": {
+          "type": "string",
+          "description": "Path for table outputs",
+          "default": "outtable"
+        },
+        "outgraph_path": {
+          "type": "string",
+          "description": "Path for graph outputs",
+          "default": "outgraph"
+        },
+        "outlist_path": {
+          "type": "string",
+          "description": "Path for listing outputs",
+          "default": "outlist"
+        },
+        "outdata_path": {
+          "type": "string",
+          "description": "Path for intermediate data outputs",
+          "default": "outdata"
+        },
+        "outlog_path": {
+          "type": "string",
+          "description": "Path for log outputs",
+          "default": "outlog"
+        },
+        "metadatalib_path": {
+          "type": "string",
+          "description": "Path to metadata library",
+          "default": "metadatalib"
+        },
+        "metadatalib_analysis_path": {
+          "type": "string",
+          "description": "Path to analysis metadata templates",
+          "default": "metadatalib/lib_analysis"
+        },
+        "metalib_config_path": {
+          "type": "string",
+          "description": "Path to configuration metadata templates",
+          "default": "metadatalib/lib_config"
+        },
+        "run_analysis_path": {
+          "type": "string",
+          "description": "Path to analysis run programs",
+          "default": "pganalysis"
+        },
+        "metadata_analysis_path": {
+          "type": "string",
+          "description": "Path to analysis metadata instances",
+          "default": "pganalysis/metadata"
+        },
+        "run_config_path": {
+          "type": "string",
+          "description": "Path to configuration run programs",
+          "default": "pgconfig"
+        },
+        "metadata_config_path": {
+          "type": "string",
+          "description": "Path to configuration metadata instances",
+          "default": "pgconfig/metadata"
+        }
+      },
+      "required": ["study_root"],
+      "additionalProperties": false
+    },
+    "datasets": {
+      "type": "object",
+      "description": "Dataset configuration",
+      "patternProperties": {
+        "^AD[A-Z]{2,4}$": {
+          "type": "object",
+          "properties": {
+            "filename": {
+              "type": "string",
+              "description": "Dataset filename without extension"
+            },
+            "format": {
+              "type": "string",
+              "enum": ["rda", "csv", "sas7bdat"],
+              "description": "Dataset file format"
+            },
+            "description": {
+              "type": "string",
+              "description": "Dataset description"
+            },
+            "observation_filter": {
+              "type": "string",
+              "description": "Default observation filter for this dataset"
+            }
+          },
+          "required": ["filename", "format", "description"],
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "output_format": {
+      "type": "object",
+      "description": "Default output format configuration",
+      "properties": {
+        "output_data_format": {
+          "type": "string",
+          "enum": ["rds", "csv"],
+          "description": "Default format for output data files",
+          "default": "rds"
+        },
+        "output_tlf_format": {
+          "type": "string",
+          "enum": ["rtf", "pdf", "docx", "html"],
+          "description": "Default format for TLF output files",
+          "default": "rtf"
+        }
+      },
+      "additionalProperties": false
+    },
+    "treatment_config": {
+      "type": "object",
+      "description": "Treatment arm configuration",
+      "properties": {
+        "treatment_random_var": {
+          "type": "string",
+          "description": "Planned treatment variable name"
+        },
+        "treatment_random_code_var": {
+          "type": "string",
+          "description": "Planned treatment code variable name"
+        },
+        "treatment_actual_var": {
+          "type": "string",
+          "description": "Actual treatment variable name"
+        },
+        "treatment_actual_code_var": {
+          "type": "string",
+          "description": "Actual treatment code variable name"
+        },
+        "treatment_labels": {
+          "type": "object",
+          "patternProperties": {
+            ".*": {"type": "string"}
+          },
+          "description": "Custom labels for treatment arms"
+        },
+        "treatment_order": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "Preferred order for treatment arms in outputs"
+        }
+      },
+      "required": ["treatment_random_var", "treatment_actual_var"],
+      "additionalProperties": false
+    },
+    "population": {
+      "type": "object",
+      "description": "Analysis population definitions",
+      "patternProperties": {
+        "^[A-Z_]+$": {
+          "type": "object",
+          "properties": {
+            "title": {
+              "type": "string",
+              "description": "Population title for display"
+            },
+            "description": {
+              "type": "string",
+              "description": "Detailed population description"
+            },
+            "flag_var": {
+              "type": "string",
+              "description": "Flag variable name in dataset"
+            },
+            "filter_expression": {
+              "type": "string",
+              "description": "R expression for population filtering"
+            }
+          },
+          "required": ["title", "filter_expression"],
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "titles": {
+      "type": "object",
+      "description": "Title and footnote templates",
+      "properties": {
+        "study_titles": {
+          "type": "object",
+          "properties": {
+            "main": {"type": "string"}
+          },
+          "additionalProperties": false
+        },
+        "table_titles": {
+          "type": "object",
+          "patternProperties": {
+            ".*": {"type": "string"}
+          },
+          "additionalProperties": false
+        },
+        "footnotes": {
+          "type": "object",
+          "properties": {
+            "standard": {
+              "type": "array",
+              "items": {"type": "string"},
+              "description": "Standard footnotes"
+            },
+            "safety": {
+              "type": "array",
+              "items": {"type": "string"},
+              "description": "Safety-related footnotes"
+            },
+            "data_cutoff": {
+              "type": "array",
+              "items": {"type": "string"},
+              "description": "Data cutoff footnotes (supports interpolation)"
+            },
+            "data_source_text": {
+              "type": "array",
+              "items": {"type": "string"},
+              "description": "Data source text templates"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "safety_analysis_param": {
+      "type": "object",
+      "description": "Safety analysis parameters",
+      "properties": {
+        "observation_filter": {
+          "type": "string",
+          "description": "Default observation filter for safety analyses"
+        },
+        "ae_toxicity_grade_var": {
+          "type": "string",
+          "description": "AE toxicity grade variable name"
+        },
+        "ae_serious_var": {
+          "type": "string",
+          "description": "AE serious flag variable name"
+        },
+        "ae_relation_var": {
+          "type": "string",
+          "description": "AE relationship variable name"
+        },
+        "ae_action_var": {
+          "type": "string",
+          "description": "AE action taken variable name"
+        },
+        "ae_death_var": {
+          "type": "string",
+          "description": "AE death flag variable name"
+        }
+      },
+      "additionalProperties": false
+    },
+    "formatting": {
+      "type": "object",
+      "description": "Formatting configuration",
+      "properties": {
+        "decimals": {
+          "type": "object",
+          "properties": {
+            "continuous": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 10,
+              "description": "Decimal places for continuous variables"
+            },
+            "percent": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 10,
+              "description": "Decimal places for percentages"
+            },
+            "pvalue": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 10,
+              "description": "Decimal places for p-values"
+            }
+          },
+          "additionalProperties": false
+        },
+        "missing_display": {
+          "type": "string",
+          "description": "Text to display for missing values",
+          "default": "--"
+        },
+        "rtf_settings": {
+          "type": "object",
+          "description": "RTF-specific formatting settings",
+          "properties": {
+            "orientation": {
+              "type": "string",
+              "enum": ["portrait", "landscape"],
+              "description": "Page orientation"
+            },
+            "font_size": {
+              "type": "number",
+              "minimum": 6,
+              "maximum": 72,
+              "description": "Font size in points"
+            },
+            "page_width": {
+              "type": "number",
+              "minimum": 1,
+              "maximum": 50,
+              "description": "Page width in inches"
+            },
+            "page_height": {
+              "type": "number",
+              "minimum": 1,
+              "maximum": 50,
+              "description": "Page height in inches"
+            },
+            "margin_left": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 10,
+              "description": "Left margin in inches"
+            },
+            "margin_right": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 10,
+              "description": "Right margin in inches"
+            },
+            "margin_top": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 10,
+              "description": "Top margin in inches"
+            },
+            "margin_bottom": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 10,
+              "description": "Bottom margin in inches"
+            },
+            "margin_header": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 5,
+              "description": "Header margin in inches"
+            },
+            "margin_footer": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 5,
+              "description": "Footer margin in inches"
+            }
+          },
+          "additionalProperties": false
+        },
+        "display_options": {
+          "type": "object",
+          "description": "Global display options",
+          "properties": {
+            "display_total_column": {
+              "type": "boolean",
+              "description": "Whether to show overall/total column by default"
+            },
+            "create_output_dataset": {
+              "type": "boolean",
+              "description": "Whether to create and save interim datasets by default"
+            },
+            "display_tableid_in_title": {
+              "type": "boolean",
+              "description": "Whether to display table ID in title"
+            },
+            "no_data_available_text": {
+              "type": "string",
+              "description": "Text to display when no data is available",
+              "default": "No Record"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "study_info",
+    "paths",
+    "treatment_config",
+    "population",
+    "formatting"
+  ],
+  "additionalProperties": false
+}

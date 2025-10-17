@@ -1,0 +1,63 @@
+# =============================================================================
+# Auto-generated TLF Batch Commands
+# =============================================================================
+# Generated: 2025-10-14 03:02:19
+# Total commands: 7
+# =============================================================================
+
+# Individual Rscript commands for each TLF:
+
+# Command 1 - TLF: ae0specific0dec0sae01.yaml - Function: ae0specific
+Rscript pganalysis/run_ae0specific.R pganalysis/metadata/ae0specific0dec0sae01.yaml pgconfig/metadata/study_config.yaml
+
+# Command 2 - TLF: ae0specific0dec0sae05.yaml - Function: ae0specific
+Rscript pganalysis/run_ae0specific.R pganalysis/metadata/ae0specific0dec0sae05.yaml pgconfig/metadata/study_config.yaml
+
+# Command 3 - TLF: ae0specific0soc05.yaml - Function: ae0specific
+Rscript pganalysis/run_ae0specific.R pganalysis/metadata/ae0specific0soc05.yaml pgconfig/metadata/study_config.yaml
+
+# Command 4 - TLF: ae0specific0soc050overall.yaml - Function: ae0specific
+Rscript pganalysis/run_ae0specific.R pganalysis/metadata/ae0specific0soc050overall.yaml pgconfig/metadata/study_config.yaml
+
+# Command 5 - TLF: baseline0char0itt.yaml - Function: baseline0char
+Rscript pganalysis/run_baseline0char.R pganalysis/metadata/baseline0char0itt.yaml pgconfig/metadata/study_config.yaml
+
+# Command 6 - TLF: baseline0char0itt0overall.yaml - Function: baseline0char
+Rscript pganalysis/run_baseline0char.R pganalysis/metadata/baseline0char0itt0overall.yaml pgconfig/metadata/study_config.yaml
+
+# Command 7 - TLF: baseline0char0white.yaml - Function: baseline0char
+Rscript pganalysis/run_baseline0char.R pganalysis/metadata/baseline0char0white.yaml pgconfig/metadata/study_config.yaml
+
+
+# =============================================================================
+# Usage Instructions:
+# =============================================================================
+# 1. Run individual command:
+#    Copy and paste any command above
+#
+# 2. Run all sequentially (PowerShell):
+#    .\run_batch_sequential.ps1
+#
+# 3. Run all in parallel (PowerShell):
+#    .\run_batch_parallel.ps1
+#    .\run_batch_parallel.ps1 -MaxParallel 4
+#
+# 4. Manual sequential execution:
+#    Execute each command one by one
+#
+# 5. Manual parallel (PowerShell example):
+#    $jobs = @()
+#    $jobs += Start-Job { Rscript pganalysis/run_ae0specific.R pganalysis/metadata/ae0specific0dec0sae01.yaml pgconfig/metadata/study_config.yaml }
+#    $jobs += Start-Job { Rscript pganalysis/run_ae0specific.R pganalysis/metadata/ae0specific0dec0sae05.yaml pgconfig/metadata/study_config.yaml }
+#    $jobs += Start-Job { Rscript pganalysis/run_ae0specific.R pganalysis/metadata/ae0specific0soc05.yaml pgconfig/metadata/study_config.yaml }
+#    ...
+#    $jobs | Wait-Job
+#    $jobs | Receive-Job
+#
+# 6. Manual parallel (Bash example):
+#    Rscript pganalysis/run_ae0specific.R pganalysis/metadata/ae0specific0dec0sae01.yaml pgconfig/metadata/study_config.yaml &
+#    Rscript pganalysis/run_ae0specific.R pganalysis/metadata/ae0specific0dec0sae05.yaml pgconfig/metadata/study_config.yaml &
+#    Rscript pganalysis/run_ae0specific.R pganalysis/metadata/ae0specific0soc05.yaml pgconfig/metadata/study_config.yaml &
+#    ...
+#    wait
+
