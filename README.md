@@ -215,6 +215,22 @@ docker run --rm -v ${PWD}/outtable:/autortlf/outtable -v ${PWD}/outlog:/autortlf
 
 The `study_config.yaml` file is automatically configured for local usage. For Docker containers, the paths are handled automatically.
 
+### Docker File Management
+
+**Essential Docker Files:**
+- **`Dockerfile`**: Main Docker image definition
+- **`docker-compose.yml`**: Container orchestration configuration  
+- **`install_packages.R`**: R package installation with pinned versions
+- **`docker_validate.R`**: Environment validation and testing
+
+**Adding New R Packages:**
+1. Edit `install_packages.R` to add new packages with exact versions
+2. Rebuild the Docker image: `docker build -t autortlf:latest .`
+3. Test the new packages: `docker run autortlf:latest Rscript docker_validate.R`
+4. Update documentation with new package versions
+
+**For detailed Docker instructions, see [DOCKER_README.md](DOCKER_README.md)**
+
 ### Expected Outputs
 
 After running either option, you'll find:

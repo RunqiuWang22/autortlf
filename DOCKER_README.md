@@ -161,20 +161,88 @@ for(pkg in c('yaml','dplyr','r2rtf')) {
 ### Local Build
 ```bash
 # Build with version tag
-./docker_build.sh 1.0.0
+docker build -t autortlf:1.0.0 .
 
 # Build with Docker Hub username
-./docker_build.sh 1.0.0 myusername
+docker build -t lkboy2018/autortlf:1.0.0 .
 ```
 
 ### Push to Registry
 ```bash
+# Tag for Docker Hub
+docker tag autortlf:1.0.0 lkboy2018/autortlf:1.0.0
+docker tag autortlf:1.0.0 lkboy2018/autortlf:latest
+
 # Push to Docker Hub
-./docker_push.sh myusername 1.0.0
+docker push lkboy2018/autortlf:1.0.0
+docker push lkboy2018/autortlf:latest
 
 # Push to GitHub Container Registry
-./docker_push.sh myusername 1.0.0 ghcr.io
+docker tag autortlf:1.0.0 ghcr.io/lkboy2018/autortlf:1.0.0
+docker push ghcr.io/lkboy2018/autortlf:1.0.0
 ```
+
+## 📦 Adding New R Packages
+
+### Update Package Dependencies
+When you need to add new R packages to the Docker image:
+
+1. **Edit `install_packages.R`**:
+```r
+# Add new packages to the packages list
+packages <- c(
+  "yaml", "jsonlite", "dplyr", "tidyr", "rlang", "stringr", 
+  "r2rtf", "optparse", "jsonvalidate",
+  "new_package_1", "new_package_2"  # Add your new packages here
+)
+
+# Add version specifications
+versions <- c(
+  "yaml" = "2.3.10",
+  "jsonlite" = "2.0.0",
+  # ... existing packages ...
+  "new_package_1" = "1.0.0",  # Specify exact versions
+  "new_package_2" = "2.1.0"
+)
+```
+
+2. **Rebuild the Docker image**:
+```bash
+# Build new image with updated packages
+docker build -t autortlf:latest .
+
+# Test the new packages
+docker run autortlf:latest Rscript -e "library(new_package_1); packageVersion('new_package_1')"
+```
+
+3. **Update documentation**:
+   - Update the "Pinned R Packages" section in this README
+   - Update `docker_validate.R` if needed
+   - Test with `docker run autortlf:latest Rscript docker_validate.R`
+
+### Package Version Management
+- **Always pin exact versions** for reproducibility
+- **Test packages** before adding to production
+- **Document changes** in commit messages
+- **Update validation script** if new packages are required
+
+## 📁 Essential Docker Files
+
+### Core Files (Required)
+- **`Dockerfile`**: Main Docker image definition
+- **`docker-compose.yml`**: Container orchestration configuration  
+- **`install_packages.R`**: R package installation with pinned versions
+- **`docker_validate.R`**: Environment validation and testing
+
+### File Purposes
+- **`Dockerfile`**: Defines the base image, R environment, and package installation
+- **`docker-compose.yml`**: Orchestrates multiple containers for development
+- **`install_packages.R`**: Ensures exact package versions for reproducibility
+- **`docker_validate.R`**: Tests the environment and runs sample analyses
+
+### Optional Files
+- **`run_batch_*.ps1`**: Windows PowerShell batch processing scripts (optional)
+- **`.dockerignore`**: Excludes unnecessary files from Docker build context
 
 ## 📊 FDA Submission Workflow
 
