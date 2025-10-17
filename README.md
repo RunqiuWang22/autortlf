@@ -185,6 +185,9 @@ docker run -d --name autortlf-rstudio -p 8787:8787 -e PASSWORD=tlf123 -v ${PWD}:
 
 # Install AutoRTLF packages in the running container
 docker exec -it autortlf-rstudio bash -c "cd /home/rstudio/autortlf && Rscript install_packages.R"
+
+# Fix path configuration for RStudio environment
+docker exec -it autortlf-rstudio bash -c "cd /home/rstudio/autortlf && sed -i 's|/autortlf|/home/rstudio/autortlf|g' pgconfig/metadata/study_config.yaml"
 ```
 
 #### Access RStudio Server (Docker Option)
@@ -201,6 +204,16 @@ docker pull lkboy2018/autortlf:latest
 # Run with pre-built image
 docker run --rm -v ${PWD}/outtable:/autortlf/outtable -v ${PWD}/outlog:/autortlf/outlog lkboy2018/autortlf:latest bash -c "cd /autortlf && Rscript pganalysis/run_baseline0char.R pganalysis/metadata/baseline0char0itt.yaml pgconfig/metadata/study_config.yaml"
 ```
+
+### Path Configuration Notes
+
+**Different environments use different path configurations:**
+
+- **Local R Environment**: Uses relative paths (`study_root: "."`)
+- **Docker Container**: Uses absolute paths (`study_root: "/autortlf"`)
+- **RStudio Container**: Requires path fix for `/home/rstudio/autortlf`
+
+The `study_config.yaml` file is automatically configured for local usage. For Docker containers, the paths are handled automatically.
 
 ### Expected Outputs
 
@@ -242,6 +255,15 @@ docker build --no-cache -t autortlf:latest .
 
 # Check container logs
 docker run --rm autortlf:latest Rscript docker_validate.R
+```
+
+#### RStudio Container Path Issues
+```bash
+# If you get "Dataset file not found" errors in RStudio container, fix paths:
+docker exec -it autortlf-rstudio bash -c "cd /home/rstudio/autortlf && sed -i 's|/autortlf|/home/rstudio/autortlf|g' pgconfig/metadata/study_config.yaml"
+
+# Verify the fix worked:
+docker exec -it autortlf-rstudio bash -c "cd /home/rstudio/autortlf && grep study_root pgconfig/metadata/study_config.yaml"
 ```
 
 ## 🏢 Full Edition Features

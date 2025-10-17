@@ -226,6 +226,9 @@ docker run -d --name autortlf-rstudio \
 # Install AutoRTLF packages in the running container
 docker exec -it autortlf-rstudio bash -c "cd /home/rstudio/autortlf && Rscript install_packages.R"
 
+# Fix path configuration for RStudio environment
+docker exec -it autortlf-rstudio bash -c "cd /home/rstudio/autortlf && sed -i 's|/autortlf|/home/rstudio/autortlf|g' pgconfig/metadata/study_config.yaml"
+
 # Access RStudio Server
 # Open browser: http://localhost:8787
 # Username: rstudio, Password: tlf123
@@ -394,6 +397,22 @@ docker exec autortlf-rstudio sudo rstudio-server restart
 # Check RStudio Server logs
 docker exec autortlf-rstudio tail -f /var/log/rstudio-server.log
 ```
+
+**Path Configuration Issues**
+```bash
+# If you get "Dataset file not found" errors, fix the path configuration:
+docker exec -it autortlf-rstudio bash -c "cd /home/rstudio/autortlf && sed -i 's|/autortlf|/home/rstudio/autortlf|g' pgconfig/metadata/study_config.yaml"
+
+# Verify the fix worked:
+docker exec -it autortlf-rstudio bash -c "cd /home/rstudio/autortlf && grep study_root pgconfig/metadata/study_config.yaml"
+```
+
+**Path Configuration Summary:**
+- **Local Environment**: `study_root: "."` (relative paths)
+- **Docker Container**: `study_root: "/autortlf"` (container paths)
+- **RStudio Container**: `study_root: "/home/rstudio/autortlf"` (RStudio paths)
+
+The local `study_config.yaml` is configured for local usage. Docker containers automatically handle path mapping.
 
 **Port Already in Use**
 ```bash

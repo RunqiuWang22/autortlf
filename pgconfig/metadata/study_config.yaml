@@ -21,7 +21,7 @@ study_info:
   data_cutoff_date: "2025-10-01"  
 
 paths:
-  study_root: "/autortlf"
+  study_root: "."
   dataadam_path: "dataadam"     # ADaM datasets
   datasdtm_path: "dataasdtm"    # SDTM datasets
   function_path: "function"     # R functions to conduct analysis and generate rtf outputs
