@@ -20,20 +20,28 @@ outdata/*
 !outdata/.gitkeep
 outgraph/*
 !outgraph/.gitkeep
+!outgraph/X99-ia01/*.png
+!outgraph/X99-ia01/*.pdf
+!outgraph/X99-ia01/*.jpg
+!outgraph/X99-ia01/*.jpeg
 outlist/*
 !outlist/.gitkeep
 outlog/*
 !outlog/.gitkeep
 outtable/*
 !outtable/.gitkeep
+!outtable/X99-ia01/*.rtf
+!outtable/X99-ia01/combined/*.rtf
 
 # Temporary files
-*.log
 *.tmp
 Rplots.pdf
 *.swp
 *.swo
 *~
+
+# Log files (exclude all logs)
+*.log
 
 # IDE files
 .vscode/
