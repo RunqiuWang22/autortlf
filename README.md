@@ -242,10 +242,20 @@ After running either option, you'll find:
 - **Combined Output**: `outtable/X99-ia01/combined/` - Merged RTF files
 
 #### Sample Outputs Include
-- `baseline0char0itt.rtf` - Baseline demographics table
-- `ae0specific0des0sae01.rtf` - Serious adverse events table
-- `baseline0char0itt.rds` - Intermediate data files
-- `baseline0char0itt.log` - Execution logs
+
+### Baseline Characteristics
+- **`baseline0char0itt.rtf`** - Intent-to-Treat population baseline demographics
+- **`baseline0char0itt0overall.rtf`** - Overall baseline characteristics summary (only totoal column)
+- **`baseline0char0white.rtf`** - White population baseline characteristics
+
+### Adverse Events
+- **`ae0specific0des0sae01.rtf`** - Serious adverse events (≥1% threshold) by decreasing incidence
+- **`ae0specific0des0sae05.rtf`** - Serious adverse events (≥5% threshold) by decreasing incidence, no AE term meets the threshold.
+- **`ae0specific0soc05.rtf`** - Adverse events by System Organ Class (≥5% threshold)
+- **`ae0specific0soc050overall.rtf`** - Overall adverse events summary (only total column)
+
+### Combined Output
+- **`combined/X99-ia01_combined_tlf_20251014.rtf`** - Selected tables combined into single document
 
 ### Troubleshooting
 

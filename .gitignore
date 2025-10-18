@@ -20,6 +20,8 @@ outdata/*
 !outdata/.gitkeep
 outgraph/*
 !outgraph/.gitkeep
+!outgraph/README.md
+!outgraph/X99-ia01/
 !outgraph/X99-ia01/*.png
 !outgraph/X99-ia01/*.pdf
 !outgraph/X99-ia01/*.jpg
@@ -30,7 +32,10 @@ outlog/*
 !outlog/.gitkeep
 outtable/*
 !outtable/.gitkeep
+!outtable/README.md
+!outtable/X99-ia01/
 !outtable/X99-ia01/*.rtf
+!outtable/X99-ia01/combined/
 !outtable/X99-ia01/combined/*.rtf
 
 # Temporary files
