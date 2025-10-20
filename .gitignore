@@ -20,7 +20,6 @@ outdata/*
 !outdata/.gitkeep
 outgraph/*
 !outgraph/.gitkeep
-!outgraph/README.md
 !outgraph/X99-ia01/
 !outgraph/X99-ia01/*.png
 !outgraph/X99-ia01/*.pdf
@@ -32,7 +31,6 @@ outlog/*
 !outlog/.gitkeep
 outtable/*
 !outtable/.gitkeep
-!outtable/README.md
 !outtable/X99-ia01/
 !outtable/X99-ia01/*.rtf
 !outtable/X99-ia01/combined/

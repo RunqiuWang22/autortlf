@@ -59,6 +59,12 @@ AutoRTLF is more than just a framework for creating clinical trial TLFs. The vis
 - Quality-controlled table generation
 
 
+## 🎥 Watch the 2-Minute Demo (MUST-SEE):
+See how I created a brand new TLF from scratch in minutes with AutoRTLF and an AI assistant. This is a glimpse into a future that is inspiring, eye-opening, and perhaps a little daunting. Don't wait anymore and be left behind, start building now!
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/G-cqRFdvkRA?si=TOmXN2VtK4NkWQej" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+
 ## 🛠️ Core Features
 
 ### **Metadata-Driven Configuration**
@@ -294,7 +300,7 @@ docker exec -it autortlf-rstudio bash -c "cd /home/rstudio/autortlf && grep stud
 
 ## 🏢 Full Edition Features
 
-**AutoRTLF Full Edition** - Currently evolving from prototype to enterprise-level software with advanced AI integration and professional deployment capabilities.
+**AutoRTLF Full Edition** - Currently evolving from prototype to enterprise-ready solution, with advanced AI integration and professional deployment capabilities.
 
 ### **🤖 Advanced AI Integration**
 - **MCP Server AI Agent Support**: Full integration with AI assistants for automated TLF generation
@@ -307,11 +313,11 @@ docker exec -it autortlf-rstudio bash -c "cd /home/rstudio/autortlf && grep stud
 - **Cross-Table Validation**: Automated consistency checking across multiple outputs
 - **Schema Validation**: Built-in validation of data structures and configurations
 
-### **🛠️ Enterprise-Grade Tools**
+### **🛠️ Supporting Tools**
 - **Table Combination**: Advanced merging and consolidation of multiple TLF outputs
 - **Editable Figure Output**: Modifiable graphical outputs
 - **Quality Assurance**: Automated validation and quality control systems
-
+- **And More**
 
 
 
