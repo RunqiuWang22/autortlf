@@ -62,7 +62,7 @@ AutoRTLF is more than just a framework for creating clinical trial TLFs. The vis
 ## 🎥 Watch the 2-Minute Demo (MUST-SEE):
 See how I created a brand new TLF from scratch in minutes with AutoRTLF and an AI assistant. This is a glimpse into a future that is inspiring, eye-opening, and perhaps a little daunting. Don't wait anymore and be left behind, start building now!
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/G-cqRFdvkRA?si=TOmXN2VtK4NkWQej" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<video src="https://www.youtube.com/embed/G-cqRFdvkRA?si=TOmXN2VtK4NkWQej" width="560" height="315" controls></video>
 
 
 ## 🛠️ Core Features
