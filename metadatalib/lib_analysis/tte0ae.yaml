@@ -1,0 +1,59 @@
+# =============================================================================
+# Time to First Adverse Event Table Configuration
+# =============================================================================
+# Program: tte0ae.yaml
+# Purpose: Configuration for time to first adverse event table
+# Version: 1.0.0
+# Created: 2026-03-09
+# Author: AutoRTLF Development Team (Kan Li, Cursor, AI Assistant)
+# =============================================================================
+
+type: Table
+rfunction: tte0ae        # function to use run this table
+table_id: "Table 14.3.2.1" # call function do not change
+rename_output: tte0ae # tlf file name
+title: "Time to First Adverse Event"
+subtitle1: "Kaplan-Meier Estimates"
+subtitle2: "(GLOBAL.population.SAFETY.title)"  #subtitle for population and subgroups
+population_from: "ADSL"                # Dataset to use for population analysis
+observation_from: "ADAE"               # Dataset to use for AE observations
+population_filter: GLOBAL.population.SAFETY.filter_expression   # Safety population filter
+observation_filter: 'GLOBAL.safety_analysis_param.observation_filter'  # Treatment-emergent AEs
+treatment_var: GLOBAL.treatment_config.treatment_actual_var    # Direct reference for now
+treatment_code: GLOBAL.treatment_config.treatment_actual_code_var
+var_keep_in_population_from: ["TRTSDT", "TRTEDT", "DTHDTC"]  # Variables required for dates
+
+display_options:  
+   display_total_column: false   # usually no global total column for survival statistics
+   display_only_total_column: false
+   create_output_dataset: GLOBAL.formatting.display_options.create_output_dataset
+
+output_format:
+  output_data_format: GLOBAL.output_format.output_data_format
+  output_tlf_format: GLOBAL.output_format.output_tlf_format 
+
+decimals:
+  continuous: GLOBAL.formatting.decimals.continuous
+  percent: GLOBAL.formatting.decimals.percent
+  hr_pvalue: 2
+
+footnotes:
+  standard: 
+    - GLOBAL.titles.footnotes.standard
+  study:
+    - "*Time to First Adverse Event is defined as the time from treatment start to the onset date of the first adverse event. Participants without an event are censored at their last known follow-up date.*"
+  data_cutoff:
+    - GLOBAL.titles.footnotes.data_cutoff
+data_source_text: "GLOBAL.titles.footnotes.data_source_text adam-adae]"
+
+# Time to Event parameters
+tte_parameters:
+  time_unit: "months"
+  time_unit_conversion: 30.4375  # Convert days to months
+  start_date_var: "TRTSDT"       # Treatment start date
+  event_date_var: "ASTDT"        # AE start date
+  reference_treatment: "Placebo" # Treatment arm for HR reference
+  censoring_rules:               # Earliest of these dates used for censored subjects
+    - "TRTEDT"
+    - "GLOBAL.study_info.data_cutoff_date"
+    - "DTHDTC"

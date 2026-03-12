@@ -1,0 +1,114 @@
+===============================================================================
+TLF GENERATION LOG - Table 14.3.2.1
+===============================================================================
+Generated: 2026-03-09 16:19:49 EDT
+User: unknown
+Working Directory: /Users/runqiuwang/Downloads/autortlf-main/autorif
+
+--- SYSTEM INFORMATION ---
+R Version: 4.5.2
+Platform: aarch64-apple-darwin20
+OS: darwin20
+System: Darwin
+Release: 23.1.0
+Machine: arm64
+
+--- SESSION INFORMATION ---
+R version 4.5.2 (2025-10-31)
+Platform: aarch64-apple-darwin20
+Running under: macOS Sonoma 14.1
+
+Matrix products: default
+BLAS:   /System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libBLAS.dylib 
+LAPACK: /Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRlapack.dylib;  LAPACK version 3.12.1
+
+locale:
+[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+
+time zone: America/New_York
+tzcode source: internal
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+[1] survival_3.8-3 stringr_1.5.2  yaml_2.3.10    jsonlite_2.0.0 r2rtf_1.3.0   
+[6] rlang_1.1.7    tidyr_1.3.1    dplyr_1.1.4   
+
+loaded via a namespace (and not attached):
+ [1] R6_2.6.1         Matrix_1.7-4     tidyselect_1.2.1 lattice_0.22-7  
+ [5] magrittr_2.0.4   splines_4.5.2    glue_1.8.0       tibble_3.3.1    
+ [9] pkgconfig_2.0.3  generics_0.1.4   lifecycle_1.0.5  cli_3.6.5       
+[13] grid_4.5.2       vctrs_0.7.1      compiler_4.5.2   tools_4.5.2     
+[17] purrr_1.2.1      pillar_1.11.1    stringi_1.8.7   
+
+--- TABLE CONFIGURATION ---
+Table ID: Table 14.3.2.1
+Title: Time to First Adverse Event
+Population From: ADSL
+Treatment Variable: TRT01A
+Population Filter: SAFFL == "Y"
+Display Total Column: FALSE
+
+--- METADATA YAML CONTENT ---
+# Note: This shows the resolved metadata after global parameter substitution
+List of 20
+ $ type                       : chr "Table"
+ $ rfunction                  : chr "tte0ae"
+ $ table_id                   : chr "Table 14.3.2.1"
+ $ rename_output              : chr "tte0ae_test_output"
+ $ title                      : chr "Time to First Adverse Event"
+ $ subtitle1                  : chr "Kaplan-Meier Estimates"
+ $ subtitle2                  : chr "(Safety Analysis Population)"
+ $ population_from            : chr "ADSL"
+ $ observation_from           : chr "ADAE"
+ $ population_filter          : chr "SAFFL == \"Y\""
+ $ observation_filter         : chr "TRTEMFL == \"Y\""
+ $ treatment_var              : chr "TRT01A"
+ $ treatment_code             : chr "TRT01AN"
+ $ var_keep_in_population_from: chr [1:3] "TRTSDT" "TRTEDT" "DTHDTC"
+ $ display_options            :List of 3
+  ..$ display_total_column     : logi FALSE
+  ..$ display_only_total_column: logi FALSE
+  ..$ create_output_dataset    : logi TRUE
+ $ output_format              :List of 2
+  ..$ output_data_format: chr "rds"
+  ..$ output_tlf_format : chr "rtf"
+ $ decimals                   :List of 3
+  ..$ continuous: chr "1"
+  ..$ percent   : chr "1"
+  ..$ hr_pvalue : int 2
+ $ footnotes                  :List of 3
+  ..$ standard   : chr "N (%) unless otherwise specified"
+  ..$ study      : chr "*Time to First Adverse Event is defined as the time from treatment start to the onset date of the first adverse"| __truncated__
+  ..$ data_cutoff: chr "Database Cutoff Date: 2025-10-01"
+ $ data_source_text           : chr "Source: [Study KL9999-X99:  adam-adae]"
+ $ tte_parameters             :List of 6
+  ..$ time_unit           : chr "months"
+  ..$ time_unit_conversion: num 30.4
+  ..$ start_date_var      : chr "TRTSDT"
+  ..$ event_date_var      : chr "ASTDT"
+  ..$ reference_treatment : chr "Placebo"
+  ..$ censoring_rules     : chr [1:3] "TRTEDT" "GLOBAL.study_info.data_cutoff_date" "DTHDTC"
+
+--- RUNTIME LOG ---
+2026-03-09 16:19:49.253865 Log initialized
+
+--- EXECUTION SUMMARY ---
+Status: SUCCESS
+Completed: 2026-03-09 16:19:49 EDT
+Warnings captured: 0
+Errors captured: 0
+Duration: 0.29 seconds
+
+--- INPUT FILES ---
+metadata_file: pganalysis/metadata/tte0ae0test.yaml
+global_config_file: pgconfig/metadata/study_config.yaml
+
+--- OUTPUT FILES ---
+rtf_file: ./outtable/X99-ia01/tte0ae_test_output.rtf ( 6483 bytes)
+output_data: ./outdata/X99-ia01/tte0ae_test_output.rds ( 424 bytes)
+
+===============================================================================
+LOG COMPLETED: 2026-03-09 16:19:49 EDT
+=============================================================================== 

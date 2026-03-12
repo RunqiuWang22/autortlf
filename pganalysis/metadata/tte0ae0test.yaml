@@ -1,0 +1,48 @@
+type: Table
+rfunction: tte0ae
+table_id: "Table 14.3.2.1"
+rename_output: tte0ae_test_output
+title: "Time to First Adverse Event"
+subtitle1: "Kaplan-Meier Estimates"
+subtitle2: "(GLOBAL.population.SAFETY.title)"
+population_from: "ADSL"
+observation_from: "ADAE"
+population_filter: GLOBAL.population.SAFETY.filter_expression
+observation_filter: 'GLOBAL.safety_analysis_param.observation_filter'
+treatment_var: GLOBAL.treatment_config.treatment_actual_var
+treatment_code: GLOBAL.treatment_config.treatment_actual_code_var
+var_keep_in_population_from: ["TRTSDT", "TRTEDT", "DTHDTC"]
+
+display_options:  
+   display_total_column: false
+   display_only_total_column: false
+   create_output_dataset: true
+
+output_format:
+  output_data_format: GLOBAL.output_format.output_data_format
+  output_tlf_format: GLOBAL.output_format.output_tlf_format 
+
+decimals:
+  continuous: GLOBAL.formatting.decimals.continuous
+  percent: GLOBAL.formatting.decimals.percent
+  hr_pvalue: 2
+
+footnotes:
+  standard: 
+    - GLOBAL.titles.footnotes.standard
+  study:
+    - "*Time to First Adverse Event is defined as the time from treatment start to the onset date of the first adverse event. Participants without an event are censored at their last known follow-up date.*"
+  data_cutoff:
+    - GLOBAL.titles.footnotes.data_cutoff
+data_source_text: "GLOBAL.titles.footnotes.data_source_text adam-adae]"
+
+tte_parameters:
+  time_unit: "months"
+  time_unit_conversion: 30.4375 
+  start_date_var: "TRTSDT"      
+  event_date_var: "ASTDT"      
+  reference_treatment: "Placebo"
+  censoring_rules:             
+    - "TRTEDT"
+    - "GLOBAL.study_info.data_cutoff_date"
+    - "DTHDTC"

@@ -1,0 +1,119 @@
+===============================================================================
+TLF GENERATION LOG - Table 14.3.1.1.1
+===============================================================================
+Generated: 2026-03-06 14:05:21 CST
+User: unknown
+Working Directory: /Users/runqiuwang/Downloads/autortlf-main/autorif
+
+--- SYSTEM INFORMATION ---
+R Version: 4.5.2
+Platform: aarch64-apple-darwin20
+OS: darwin20
+System: Darwin
+Release: 23.1.0
+Machine: arm64
+
+--- SESSION INFORMATION ---
+R version 4.5.2 (2025-10-31)
+Platform: aarch64-apple-darwin20
+Running under: macOS Sonoma 14.1
+
+Matrix products: default
+BLAS:   /System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libBLAS.dylib 
+LAPACK: /Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRlapack.dylib;  LAPACK version 3.12.1
+
+locale:
+[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+
+time zone: America/Chicago
+tzcode source: internal
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+[1] r2rtf_1.2.0    stringr_1.5.2  rlang_1.1.7    tidyr_1.3.1    dplyr_1.1.4   
+[6] jsonlite_2.0.0 yaml_2.3.10   
+
+loaded via a namespace (and not attached):
+ [1] R6_2.6.1         tidyselect_1.2.1 magrittr_2.0.4   glue_1.8.0      
+ [5] tibble_3.3.1     pkgconfig_2.0.3  generics_0.1.4   lifecycle_1.0.5 
+ [9] cli_3.6.5        vctrs_0.7.1      compiler_4.5.2   tools_4.5.2     
+[13] purrr_1.2.1      pillar_1.11.1    stringi_1.8.7   
+
+--- TABLE CONFIGURATION ---
+Table ID: Table 14.3.1.1.1
+Title: Participants With Adverse Events
+Population From: ADSL
+Treatment Variable: TRT01A
+Population Filter: SAFFL == "Y"
+Display Total Column: TRUE
+
+--- METADATA YAML CONTENT ---
+# Note: This shows the resolved metadata after global parameter substitution
+List of 21
+ $ type                       : chr "Table"
+ $ rfunction                  : chr "ae0specific"
+ $ table_id                   : chr "Table 14.3.1.1.1"
+ $ rename_output              : chr "ae0specific0soc05"
+ $ title                      : chr "Participants With Adverse Events"
+ $ append_title               : chr "by Body System and Organ Class"
+ $ subtitle1                  : chr "(Incidence {ae_parameters.min_subjects_threshold} in One or More Treatment Groups)"
+ $ subtitle2                  : chr "(Safety Analysis Population)"
+ $ population_from            : chr "ADSL"
+ $ observation_from           : chr "ADAE"
+ $ population_filter          : chr "SAFFL == \"Y\""
+ $ observation_filter         : chr "TRTEMFL == \"Y\""
+ $ treatment_var              : chr "TRT01A"
+ $ treatment_code             : chr "TRT01AN"
+ $ var_keep_in_population_from: chr "RACE"
+ $ display_options            :List of 3
+  ..$ display_total_column     : chr "TRUE"
+  ..$ display_only_total_column: logi FALSE
+  ..$ create_output_dataset    : chr "TRUE"
+ $ output_format              :List of 2
+  ..$ output_data_format: chr "rds"
+  ..$ output_tlf_format : chr "rtf"
+ $ decimals                   :List of 2
+  ..$ continuous: chr "1"
+  ..$ percent   : chr "1"
+ $ footnotes                  :List of 3
+  ..$ standard   : chr "N (%) unless otherwise specified"
+  ..$ study      : NULL
+  ..$ data_cutoff: chr "Database Cutoff Date: 2025-10-01"
+ $ data_source_text           : chr "Source: [Study KL9999-X99:  adam-adae]"
+ $ ae_parameters              :List of 7
+  ..$ min_subjects_threshold  : num 5
+  ..$ ae_term_var             : chr "AEDECOD"
+  ..$ group_by_var            : chr "AEBODSYS"
+  ..$ group_display_name      : chr "Body System and Organ Class"
+  ..$ to_proper_case          : logi TRUE
+  ..$ sort_options            :List of 5
+  .. ..$ sort_by          : chr "frequency"
+  .. ..$ sort_column      : chr "Xanomeline High Dose"
+  .. ..$ sort_order       : chr "desc"
+  .. ..$ group_sort       : chr "alphabetical"
+  .. ..$ within_group_sort: chr "frequency"
+  ..$ display_grouping_headers: logi TRUE
+
+--- RUNTIME LOG ---
+2026-03-06 14:05:21.612604 Log initialized
+
+--- EXECUTION SUMMARY ---
+Status: SUCCESS
+Completed: 2026-03-06 14:05:22 CST
+Warnings captured: 0
+Errors captured: 0
+Duration: 0.73 seconds
+
+--- INPUT FILES ---
+metadata_file: pganalysis/metadata/ae0specific0soc05.yaml
+global_config_file: pgconfig/metadata/study_config.yaml
+
+--- OUTPUT FILES ---
+rtf_file: ./outtable/X99-ia01/ae0specific0soc05.rtf ( 32994 bytes)
+output_data: ./outdata/X99-ia01/ae0specific0soc05.rds ( 1254 bytes)
+
+===============================================================================
+LOG COMPLETED: 2026-03-06 14:05:22 CST
+=============================================================================== 

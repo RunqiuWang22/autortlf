@@ -1,8 +1,8 @@
 # =============================================================================
 # Auto-generated TLF Batch Commands
 # =============================================================================
-# Generated: 2025-10-14 03:02:19
-# Total commands: 7
+# Generated: 2026-03-06 14:05:18
+# Total commands: 11
 # =============================================================================
 
 # Individual Rscript commands for each TLF:
@@ -19,14 +19,26 @@ Rscript pganalysis/run_ae0specific.R pganalysis/metadata/ae0specific0soc05.yaml 
 # Command 4 - TLF: ae0specific0soc050overall.yaml - Function: ae0specific
 Rscript pganalysis/run_ae0specific.R pganalysis/metadata/ae0specific0soc050overall.yaml pgconfig/metadata/study_config.yaml
 
-# Command 5 - TLF: baseline0char0itt.yaml - Function: baseline0char
+# Command 5 - TLF: baseline0char0itt_update.yaml - Function: baseline0char
+Rscript pganalysis/run_baseline0char.R pganalysis/metadata/baseline0char0itt_update.yaml pgconfig/metadata/study_config.yaml
+
+# Command 6 - TLF: baseline0char0itt.yaml - Function: baseline0char
 Rscript pganalysis/run_baseline0char.R pganalysis/metadata/baseline0char0itt.yaml pgconfig/metadata/study_config.yaml
 
-# Command 6 - TLF: baseline0char0itt0overall.yaml - Function: baseline0char
+# Command 7 - TLF: baseline0char0itt0overall.yaml - Function: baseline0char
 Rscript pganalysis/run_baseline0char.R pganalysis/metadata/baseline0char0itt0overall.yaml pgconfig/metadata/study_config.yaml
 
-# Command 7 - TLF: baseline0char0white.yaml - Function: baseline0char
+# Command 8 - TLF: baseline0char0white.yaml - Function: baseline0char
 Rscript pganalysis/run_baseline0char.R pganalysis/metadata/baseline0char0white.yaml pgconfig/metadata/study_config.yaml
+
+# Command 9 - TLF: gemini_baseline_table.yaml - Function: baseline0char
+Rscript pganalysis/run_baseline0char.R pganalysis/metadata/gemini_baseline_table.yaml pgconfig/metadata/study_config.yaml
+
+# Command 10 - TLF: gemini_test_table_2.yaml - Function: baseline0char
+Rscript pganalysis/run_baseline0char.R pganalysis/metadata/gemini_test_table_2.yaml pgconfig/metadata/study_config.yaml
+
+# Command 11 - TLF: gemini_test_table.yaml - Function: baseline0char
+Rscript pganalysis/run_baseline0char.R pganalysis/metadata/gemini_test_table.yaml pgconfig/metadata/study_config.yaml
 
 
 # =============================================================================

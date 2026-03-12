@@ -1,0 +1,42 @@
+type: Table
+rfunction: baseline0char
+table_id: "Table X.X.X"
+rename_output: gemini_test_table_2
+title: "Baseline Characteristics"
+subtitle: "(GLOBAL.population.ITT.title)"
+population_from: "ADSL"
+population_filter: GLOBAL.population.ITT.filter_expression
+treatment_var: GLOBAL.treatment_config.treatment_random_var
+treatment_code: GLOBAL.treatment_config.treatment_random_code_var
+display_options:
+   display_n: false
+   display_mean: true
+   display_median: true
+   display_range: true
+   display_IQR: true
+   display_total_column: GLOBAL.formatting.display_options.display_total_column
+   display_only_total_column: false
+   create_output_dataset: GLOBAL.formatting.display_options.create_output_dataset
+output_format:
+  output_data_format: GLOBAL.output_format.output_data_format
+  output_tlf_format: GLOBAL.output_format.output_tlf_format
+decimals:
+  continuous: GLOBAL.formatting.decimals.continuous
+  percent: GLOBAL.formatting.decimals.percent
+footnotes:
+  standard:
+    - GLOBAL.titles.footnotes.standard
+  data_cutoff:
+    - GLOBAL.titles.footnotes.data_cutoff
+data_source_text: "GLOBAL.titles.footnotes.data_source_text adam-adsl]"
+variables:
+  - name: "Age (years)"
+    source_var: "AGE"
+    type: "continuous"
+  - name: "Gender"
+    source_var: "SEX"
+    type: "categorical"
+    levels: ["M", "F"]
+    label_overrides:
+      M: "Male"
+      F: "Female"

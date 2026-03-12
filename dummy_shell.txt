@@ -1,0 +1,17 @@
+Table 14.1.X: Baseline Characteristics
+Population: Intent-to-Treat
+
+Treatment Groups: Placebo, Low Dose, High Dose
+
+Variables to display:
+- Age (years)
+  - Mean (SD)
+  - Median
+  - Min, Max
+- Sex (Male, Female)
+  - n (%)
+- Race (White, Black, Asian, Other)
+  - n (%)
+- Weight (kg)
+  - Mean (SD)
+  - Median

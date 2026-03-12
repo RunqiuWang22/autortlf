@@ -1,0 +1,230 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://autortlf.com/schemas/tte0ae.schema.json",
+  "title": "Time to First Adverse Event Table Configuration Schema",
+  "description": "JSON Schema for Time to First AE survival analysis table configuration",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": ["Table"],
+      "description": "Type of TLF output"
+    },
+    "rfunction": {
+      "type": "string",
+      "const": "tte0ae",
+      "description": "R function name to execute this table"
+    },
+    "table_id": {
+      "type": "string",
+      "description": "Table identifier (e.g., Table 14.3.2.1)",
+      "pattern": "^Table\\s+[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+.*$"
+    },
+    "rename_output": {
+      "type": "string",
+      "description": "Output file name without extension",
+      "pattern": "^[a-zA-Z0-9_]+$"
+    },
+    "title": {
+      "type": "string",
+      "description": "Main title of the table"
+    },
+    "subtitle1": {
+      "type": "string",
+      "description": "First subtitle line"
+    },
+    "subtitle2": {
+      "type": "string",
+      "description": "Second subtitle line for population (supports GLOBAL references)"
+    },
+    "population_from": {
+      "type": "string",
+      "description": "Dataset name for population analysis",
+      "enum": ["ADSL"]
+    },
+    "observation_from": {
+      "type": "string",
+      "description": "Dataset name for AE observations",
+      "enum": ["ADAE"]
+    },
+    "population_filter": {
+      "type": "string",
+      "description": "R expression for population filtering (supports GLOBAL references)"
+    },
+    "observation_filter": {
+      "type": "string",
+      "description": "R expression for observation filtering (supports GLOBAL references)"
+    },
+    "treatment_var": {
+      "type": "string",
+      "description": "Treatment variable name (supports GLOBAL references)"
+    },
+    "treatment_code": {
+      "type": "string",
+      "description": "Treatment code variable name (supports GLOBAL references)"
+    },
+    "var_keep_in_population_from": {
+      "type": "array",
+      "items": {"type": "string"},
+      "description": "Variables to keep from population dataset that are not in observation dataset"
+    },
+    "display_options": {
+      "type": "object",
+      "description": "Display configuration options",
+      "properties": {
+        "display_total_column": {
+          "oneOf": [
+            {"type": "boolean"},
+            {"type": "string", "pattern": "^GLOBAL\\."}
+          ],
+          "description": "Whether to show overall/total column (supports GLOBAL references)"
+        },
+        "display_only_total_column": {
+          "type": "boolean",
+          "description": "Whether to display only the total column (no treatment groups)",
+          "default": false
+        },
+        "create_output_dataset": {
+          "oneOf": [
+            {"type": "boolean"},
+            {"type": "string", "pattern": "^GLOBAL\\."}
+          ],
+          "description": "Whether to create and save interim dataset (supports GLOBAL references)"
+        }
+      },
+      "additionalProperties": false
+    },
+    "output_format": {
+      "type": "object",
+      "description": "Output format configuration",
+      "properties": {
+        "output_data_format": {
+          "oneOf": [
+            {"type": "string", "enum": ["rds", "csv"]},
+            {"type": "string", "pattern": "^GLOBAL\\."}
+          ],
+          "description": "Format for output data files (supports GLOBAL references)"
+        },
+        "output_tlf_format": {
+          "oneOf": [
+            {"type": "string", "enum": ["rtf", "pdf", "docx", "html"]},
+            {"type": "string", "pattern": "^GLOBAL\\."}
+          ],
+          "description": "Format for TLF output files (supports GLOBAL references)"
+        }
+      },
+      "additionalProperties": false
+    },
+    "decimals": {
+      "type": "object",
+      "description": "Decimal place configuration",
+      "properties": {
+        "continuous": {
+          "oneOf": [
+            {"type": "integer", "minimum": 0, "maximum": 10},
+            {"type": "string", "pattern": "^GLOBAL\\."}
+          ],
+          "description": "Decimal places for continuous variables (supports GLOBAL references)"
+        },
+        "percent": {
+          "oneOf": [
+            {"type": "integer", "minimum": 0, "maximum": 10},
+            {"type": "string", "pattern": "^GLOBAL\\."}
+          ],
+          "description": "Decimal places for percentages (supports GLOBAL references)"
+        },
+        "hr_pvalue": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 10,
+          "description": "Decimal places for hazard ratio and p-value"
+        }
+      },
+      "additionalProperties": false
+    },
+    "footnotes": {
+      "type": "object",
+      "description": "Footnote configuration",
+      "properties": {
+        "standard": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {"type": "string"},
+              {"type": "string", "pattern": "^GLOBAL\\."}
+            ]
+          },
+          "description": "Standard footnotes (supports GLOBAL references)"
+        },
+        "study": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "Study-specific footnotes"
+        },
+        "data_cutoff": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {"type": "string"},
+              {"type": "string", "pattern": "^GLOBAL\\."}
+            ]
+          },
+          "description": "Data cutoff footnotes (supports GLOBAL references)"
+        }
+      },
+      "additionalProperties": false
+    },
+    "data_source_text": {
+      "type": "string",
+      "description": "Data source text (supports GLOBAL references)"
+    },
+    "tte_parameters": {
+      "type": "object",
+      "description": "Time to event analysis parameters",
+      "properties": {
+        "time_unit": {
+          "type": "string",
+          "enum": ["days", "months", "years"],
+          "description": "Unit of time for analysis (e.g., months)"
+        },
+        "time_unit_conversion": {
+            "type": "number",
+            "description": "Conversion factor from days to time_unit (e.g. 30.4375 for months)"
+        },
+        "start_date_var": {
+          "type": "string",
+          "description": "Variable name for start date (e.g., TRTSDT)"
+        },
+        "event_date_var": {
+          "type": "string",
+          "description": "Variable name for event date (e.g., ASTDT)"
+        },
+        "reference_treatment": {
+          "type": "string",
+          "description": "Treatment arm name to use as reference for Hazard Ratio (e.g., Placebo)"
+        },
+        "censoring_rules": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "Variable names for censoring dates (evaluated in order, earliest is used)"
+          },
+          "description": "List of variables to use for censoring dates if no event occurred"
+        }
+      },
+      "required": ["time_unit", "start_date_var", "event_date_var", "reference_treatment", "censoring_rules"],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "type",
+    "rfunction",
+    "table_id", 
+    "rename_output",
+    "title",
+    "population_from",
+    "observation_from",
+    "tte_parameters"
+  ],
+  "additionalProperties": false
+}
